@@ -44,7 +44,7 @@ body {
   right: 0;
   display: flex;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: 0 52px 0 16px;
   pointer-events: none;
   font-family: 'Orbitron', monospace;
   font-size: 13px;
@@ -63,6 +63,41 @@ body {
 #lives { color: #6bcb77; text-shadow: 0 0 10px rgba(107, 203, 119, 0.5); }
 #level-display { color: #4d96ff; text-shadow: 0 0 10px rgba(77, 150, 255, 0.5); }
 #highscore { color: #c084fc; text-shadow: 0 0 10px rgba(192, 132, 252, 0.5); }
+
+.fullscreen-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.fullscreen-btn:hover {
+  color: #00d4ff;
+  border-color: rgba(0, 212, 255, 0.4);
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.fullscreen-btn .fullscreen-icon {
+  flex-shrink: 0;
+}
+
+#game-container:fullscreen .fullscreen-btn,
+#game-container:-webkit-full-screen .fullscreen-btn,
+#game-container:-moz-full-screen .fullscreen-btn {
+  top: 16px;
+  right: 16px;
+}
 
 #menu-overlay,
 #gameover-overlay,
