@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Logs / temp
+*.log
+.DS_Store
+.vercel
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo

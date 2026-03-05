@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0a0a0f;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Courier New', monospace;
+  overflow: hidden;
+}
+
+#game-container {
+  position: relative;
+  display: inline-block;
+}
+
+#game-canvas {
+  display: block;
+  background: #000;
+  border: 2px solid #333;
+  cursor: none;
+  outline: none;
+}
+
+#game-canvas:focus {
+  outline: none;
+}
+
+#hud {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px;
+  pointer-events: none;
+  color: #fff;
+  font-size: 14px;
+  text-shadow: 0 0 4px #000;
+}
+
+#menu-overlay,
+#gameover-overlay,
+#level-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  text-align: center;
+  pointer-events: none;
+}
+
+#menu-overlay.visible,
+#gameover-overlay.visible,
+#level-overlay.visible {
+  display: flex;
+  pointer-events: auto;
+}
+
+#menu-overlay h1,
+#gameover-overlay h1,
+#level-overlay h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.2em;
+}
+
+#menu-overlay p,
+#gameover-overlay p,
+#level-overlay p {
+  margin-bottom: 1.5rem;
+  color: #aaa;
+}
+
+.btn {
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #fff;
+  background: transparent;
+  border: 2px solid #fff;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+.controls-hint {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 1rem;
+}
