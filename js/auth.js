@@ -3,11 +3,19 @@
  * Nach 5 Fehlversuchen: Sperre 15 Minuten (sessionStorage).
  */
 (function () {
-  var HASH_HEX = '388533b00143dad5550d7f458a1d6ab4e80c1ccf0ea112af2daec7e8e8d08509';
+  var HASH_HEX = 'fefcaeb91ff698cbae3274e3c408a6ddd3d87418639478f0851a6b6e08e445c7';
   var STORAGE_KEY = 'asteroids_auth';
   var LOCK_KEY = 'asteroids_lock';
   var MAX_ATTEMPTS = 5;
   var LOCK_MINUTES = 15;
+  var MAX_PASSWORD_LENGTH = 256;
+
+  function constantTimeCompare(a, b) {
+    if (typeof a !== 'string' || typeof b !== 'string' || a.length !== b.length) return false;
+    var out = 0;
+    for (var i = 0; i < a.length; i++) out |= (a.charCodeAt(i) ^ b.charCodeAt(i));
+    return out === 0;
+  }
 
   function isLocked() {
     try {
@@ -54,8 +62,9 @@
   }
 
   function checkPassword(input) {
+    if (input.length > MAX_PASSWORD_LENGTH) return Promise.resolve(false);
     return sha256Hex(input).then(function (hash) {
-      return hash.toLowerCase() === HASH_HEX.toLowerCase();
+      return constantTimeCompare(hash.toLowerCase(), HASH_HEX.toLowerCase());
     });
   }
 
@@ -99,6 +108,7 @@
         if (Date.now() >= end) {
           clearInterval(interval);
           clearLock();
+          setAttemptCount(0);
           input.disabled = false;
           submit.disabled = false;
           if (error) error.textContent = '';
@@ -117,13 +127,13 @@
       }
       if (error) error.textContent = '';
       submit.disabled = true;
+      input.value = '';
 
       checkPassword(pw).then(function (ok) {
         if (ok) {
           setUnlocked();
           setAttemptCount(0);
           overlay.style.display = 'none';
-          input.value = '';
           if (window.AsteroidsGame && window.AsteroidsGame.canvas) {
             window.AsteroidsGame.canvas.focus();
           }
