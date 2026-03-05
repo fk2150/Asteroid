@@ -80,6 +80,7 @@ Game.prototype.resize = function () {
   this.canvas.height = h;
   this.width = w;
   this.height = h;
+  this.stars = null;
 };
 
 Game.prototype.tick = function (now) {
@@ -144,8 +145,34 @@ Game.prototype.updateGameOver = function () {
 
 Game.prototype.draw = function () {
   var ctx = this.ctx;
-  ctx.fillStyle = '#000';
-  ctx.fillRect(0, 0, this.width, this.height);
+  var w = this.width;
+  var h = this.height;
+
+  var bg = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w * 0.8);
+  bg.addColorStop(0, '#0d0a1a');
+  bg.addColorStop(0.5, '#0a0618');
+  bg.addColorStop(1, '#050308');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, w, h);
+
+  if (!this.stars) {
+    this.stars = [];
+    for (var i = 0; i < 120; i++) {
+      this.stars.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.2 + 0.3,
+        bright: Math.random() > 0.7
+      });
+    }
+  }
+  var t = performance.now() * 0.002;
+  this.stars.forEach(function (s) {
+    ctx.fillStyle = s.bright ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,' + (0.3 + Math.sin(t + s.x) * 0.2) + ')';
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
 
   if (this.state === Game.STATES.PLAYING || this.state === Game.STATES.LEVEL_CLEAR) {
     if (this.ship) this.ship.draw(ctx, this);

@@ -48,8 +48,10 @@ Ship.prototype.draw = function (ctx, game) {
   ctx.save();
   ctx.translate(this.x, this.y);
   ctx.rotate(this.angle);
-  ctx.strokeStyle = '#fff';
-  ctx.lineWidth = 1.5;
+  ctx.shadowColor = '#00d4ff';
+  ctx.shadowBlur = 14;
+  ctx.strokeStyle = '#00d4ff';
+  ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.moveTo(this.radius, 0);
   ctx.lineTo(-this.radius * 0.8, this.radius * 0.6);
@@ -57,5 +59,8 @@ Ship.prototype.draw = function (ctx, game) {
   ctx.lineTo(-this.radius * 0.8, -this.radius * 0.6);
   ctx.closePath();
   ctx.stroke();
+  ctx.shadowBlur = 0;
+  ctx.fillStyle = 'rgba(0, 212, 255, 0.25)';
+  ctx.fill();
   ctx.restore();
 };

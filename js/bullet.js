@@ -10,6 +10,7 @@ function Bullet(x, y, vx, vy, isUfo) {
   this.age = 0;
   this.maxAge = isUfo ? 1.5 : 1;
   this.radius = 2;
+  this.isUfo = isUfo;
 }
 
 Bullet.prototype.update = function (dt, width, height) {
@@ -23,7 +24,14 @@ Bullet.prototype.update = function (dt, width, height) {
 Bullet.prototype.draw = function (ctx) {
   if (!this.active) return;
   ctx.save();
-  ctx.fillStyle = '#fff';
+  if (this.isUfo) {
+    ctx.fillStyle = '#e879f9';
+    ctx.shadowColor = '#e879f9';
+  } else {
+    ctx.fillStyle = '#ffd93d';
+    ctx.shadowColor = '#ffd93d';
+  }
+  ctx.shadowBlur = 8;
   ctx.beginPath();
   ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
   ctx.fill();

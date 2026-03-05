@@ -40,18 +40,26 @@ Asteroid.prototype.update = function (dt, width, height) {
 };
 
 Asteroid.prototype.draw = function (ctx) {
+  var color = this.size === 'large' ? '#ff9f43' : this.size === 'medium' ? '#ffd93d' : '#6bcb77';
   ctx.save();
   ctx.translate(this.x, this.y);
   ctx.rotate(this.angle);
-  ctx.strokeStyle = '#fff';
-  ctx.lineWidth = 1.5;
   ctx.beginPath();
   this.verts.forEach(function (v, i) {
     if (i === 0) ctx.moveTo(v.x, v.y);
     else ctx.lineTo(v.x, v.y);
   });
   ctx.closePath();
+  if (this.size === 'large') ctx.fillStyle = 'rgba(255,159,67,0.2)';
+  else if (this.size === 'medium') ctx.fillStyle = 'rgba(255,217,61,0.2)';
+  else ctx.fillStyle = 'rgba(107,203,119,0.2)';
+  ctx.fill();
+  ctx.shadowColor = color;
+  ctx.shadowBlur = this.size === 'large' ? 16 : this.size === 'medium' ? 12 : 8;
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
   ctx.stroke();
+  ctx.shadowBlur = 0;
   ctx.restore();
 };
 

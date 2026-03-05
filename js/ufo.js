@@ -39,14 +39,21 @@ Ufo.prototype.update = function (dt, game) {
 
 Ufo.prototype.draw = function (ctx) {
   ctx.save();
-  ctx.strokeStyle = '#0f8';
-  ctx.lineWidth = 1.5;
+  ctx.shadowColor = '#22c55e';
+  ctx.shadowBlur = 18;
+  ctx.strokeStyle = '#22c55e';
+  ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
   ctx.stroke();
   ctx.beginPath();
   ctx.arc(this.x, this.y, this.radius * 0.5, 0, Math.PI * 2);
   ctx.stroke();
+  ctx.shadowBlur = 0;
+  ctx.fillStyle = 'rgba(34, 197, 94, 0.2)';
+  ctx.beginPath();
+  ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+  ctx.fill();
   ctx.restore();
 };
 
