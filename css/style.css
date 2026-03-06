@@ -270,3 +270,70 @@ body {
   color: #f87171;
   min-height: 1.4em;
 }
+
+/* Touch-Steuerung (Handy/Tablet) */
+#touch-controls {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  border-radius: 10px;
+  z-index: 10;
+}
+
+#touch-controls.touch-controls--visible {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 12px 24px 12px;
+}
+
+#touch-controls .touch-controls__left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+#touch-controls .touch-btn {
+  min-width: 48px;
+  min-height: 48px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  border-radius: 12px;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  touch-action: manipulation;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+#touch-controls .touch-btn:active {
+  background: rgba(0, 212, 255, 0.25);
+  border-color: rgba(0, 212, 255, 0.6);
+  color: #fff;
+}
+
+#touch-controls .touch-btn--fire {
+  min-width: 72px;
+  min-height: 56px;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  background: rgba(124, 58, 237, 0.4);
+  border-color: rgba(124, 58, 237, 0.5);
+}
+
+#touch-controls .touch-btn--fire:active {
+  background: rgba(124, 58, 237, 0.6);
+  border-color: rgba(167, 139, 250, 0.8);
+}
