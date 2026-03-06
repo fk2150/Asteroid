@@ -23,6 +23,17 @@ body {
   box-shadow: 0 0 60px rgba(0, 212, 255, 0.15), 0 0 120px rgba(138, 43, 226, 0.1);
 }
 
+@media (max-width: 768px), (hover: none) {
+  #game-container {
+    width: 100%;
+    max-width: 100vw;
+    height: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    border-radius: 0;
+  }
+}
+
 #game-canvas {
   display: block;
   background: radial-gradient(ellipse at 50% 50%, #0a0822 0%, #050510 70%, #000 100%);
@@ -281,7 +292,7 @@ body {
   bottom: 0;
   pointer-events: none;
   border-radius: 10px;
-  z-index: 10;
+  z-index: 100;
 }
 
 #touch-controls.touch-controls--visible {
@@ -289,6 +300,7 @@ body {
   align-items: flex-end;
   justify-content: space-between;
   padding: 0 12px 24px 12px;
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
 }
 
 #touch-controls .touch-controls__left {

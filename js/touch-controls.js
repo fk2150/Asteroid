@@ -7,7 +7,11 @@
   var activeTouchZones = {};
 
   function isTouchOrNarrow() {
-    return ('ontouchstart' in window) || (typeof window.matchMedia === 'function' && window.matchMedia('(max-width: ' + VIEWPORT_THRESHOLD + 'px)').matches);
+    if (typeof navigator !== 'undefined' && navigator.maxTouchPoints > 0) return true;
+    if ('ontouchstart' in window) return true;
+    if (typeof window.matchMedia === 'function' && window.matchMedia('(max-width: ' + VIEWPORT_THRESHOLD + 'px)').matches) return true;
+    if (typeof window.matchMedia === 'function' && window.matchMedia('(hover: none)').matches) return true;
+    return false;
   }
 
   function getZoneFromElement(el) {
@@ -118,6 +122,8 @@
     if (!isTouchOrNarrow()) return;
 
     var container = createOverlay();
+    if (!container.parentNode) return;
+
     container.addEventListener('touchstart', onTouchStart, { passive: false });
     container.addEventListener('touchend', onTouchEnd, { passive: true });
     container.addEventListener('touchcancel', onTouchEnd, { passive: true });
@@ -135,8 +141,10 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', function () {
+      setTimeout(init, 100);
+    });
   } else {
-    init();
+    setTimeout(init, 100);
   }
 })();
