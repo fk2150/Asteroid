@@ -1,11 +1,11 @@
 ---
-description: Nach Änderungen immer zu Git und Vercel pushen
-alwaysApply: false
+description: Nach Änderungen immer direkt zu Git und Vercel deployen
+alwaysApply: true
 ---
 
-# Git und Vercel nach Änderungen
+# Immer direkt deployen
 
-Nach jeder inhaltlichen Änderung am Projekt (Code, Config, Assets) **immer**:
+Nach jeder inhaltlichen Änderung am Projekt (Code, Config, Assets) **sofort und ohne Nachfrage**:
 
 1. **Git**: Alle Änderungen committen und nach GitHub pushen.
    - `git add -A`
@@ -15,7 +15,4 @@ Nach jeder inhaltlichen Änderung am Projekt (Code, Config, Assets) **immer**:
 2. **Vercel**: Production-Deploy ausführen.
    - `npx vercel --prod --yes` (im Projektordner)
 
-Unter Windows PowerShell Befehle mit `;` verketten, z. B.:
-`Set-Location "d:\Cursor Projekte\Asteroid"; git add -A; git commit -m "…"; git push origin master`
-
-Erst wenn Push und Deploy erfolgreich waren, die Aufgabe als erledigt melden.
+Unter Windows PowerShell Befehle mit `;` verketten. Nicht nachfragen, ob gepusht werden soll – immer direkt deployen.
